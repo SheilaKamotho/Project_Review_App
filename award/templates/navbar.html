@@ -24,7 +24,21 @@
                 <a style="float: right; color: brown;" href="/accounts/login">Log In</a>
                 {% endif %}
             </div>
+            <!-- Adding a search form  -->
+            <div class="col-sm-4 col-md-4" style="margin-right: 80px;">
 
+                <form class="navbar-form" role="search" action="{% url 'search_results' %}">
+    
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search Project Title" name="title">
+                        <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i style="color: brown;" class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+    
+                </form>
+            </div>
+          <!-- search form end -->
 
         </div>
     </nav>
