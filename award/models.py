@@ -16,8 +16,8 @@ class Profile(models.Model):
 
     @classmethod
     def save_profile(cls):
-        posts=cls.objects.filter()
-        return posts
+        profile=cls.objects.filter()
+        return profile
 
     def update_profile(self):
         self.update()
@@ -25,4 +25,22 @@ class Profile(models.Model):
     def delete_profile():
         self.delete()
 
+class Project(models.Model):
+    title = models.CharField(max_length = 60)
+    image = models.ImageField(upload_to = 'image/')
+    description = models.TextField()
+    link = models.CharField(max_length = 300)
 
+    def save_project(self):
+        self.save()
+
+    @classmethod
+    def save_project(cls):
+        project=cls.objects.filter()
+        return project
+
+    def update_project(self):
+        self.update()
+
+    def delete_project():
+        self.delete()
