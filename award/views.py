@@ -11,3 +11,4 @@ def project(request):
     profile=Profile.objects.all()
     project=Project.objects.all()
     return render(request, 'project.html',{"profile":profile, "project":project})
+
