@@ -32,9 +32,6 @@
                     <a class="btn btn-danger btn-sm"
                         style="color: whitesmoke; float: right; margin-right: 20px;">Rate
                     </a>
-                    <!-- <a class="btn btn-danger btn-sm"
-                        style="color: whitesmoke; float: right; margin-right: 5px;">Details</a> -->
-                    <!-- Trigger the modal with a button -->
                     <button type="button" style="color: whitesmoke; float: right; margin-right: 5px;"
                         class="btn btn-danger btn-sm" data-toggle="modal"
                         data-target="#myModal{{project.id}}">Details
@@ -44,8 +41,7 @@
         </div>
     </div>    
     <!-- Modal -->
-    <div class="modal fade" id="myModal{{project.id}}" role="dialog">
-            
+    <div class="modal fade" id="myModal{{project.id}}" role="dialog">   
         <div class="modal-dialog"> 
             <div class="modal-content">
                 <div class="modal-header">
@@ -63,11 +59,8 @@
                     <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
                 </div>
             </div>   
-         </div>
-
-       
-    </div>
-    
+         </div>  
+    </div>    
 </div>
 
 {% endfor %}

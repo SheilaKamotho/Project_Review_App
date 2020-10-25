@@ -4,16 +4,16 @@
 
   <div class="row">
     {% if articles%}
-      <h2>Found {{ projects|length }} of searched term {{message}}</h2>
+      <h2>Found {{ projects|length }} of searched term {{message}}.</h2>
     {% else %}
-      <h2> Found 0 projectss for the search term {{message}}</h2>
+      <h2> Found 0 projects for the search term {{message}}.</h2>
     {% endif %}
 
   </div>
 
   <div class="row">
 
-  {% if articles %}
+  {% if projects %}
     {% for project in projects %}
       <div class="col-sm-6 col-md-3">
           <h1>{{project.title}}</h1>

@@ -38,10 +38,9 @@ class Project(models.Model):
         project=cls.objects.filter()
         return project
     
-    @classmethod
     def search_by_title(cls,search_term):
-        project = cls.objects.filter(title__icontains=search_term)
-        return project
+        proj = cls.objects.filter(title__icontains=search_term)
+        return proj
 
     def update_project(self):
         self.update()
