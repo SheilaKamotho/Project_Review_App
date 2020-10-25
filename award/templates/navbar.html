@@ -11,17 +11,21 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="{% url 'project' %}" style="color: cornsilk;"><strong>Project Review</strong></a>
+                <a class="navbar-brand" href="{% url 'project' %}" style="color: cornsilk;"><strong>Project
+                        Review</strong></a>
             </div>
             <div style="margin-top: 15px;" class="content">
+                {% if user.is_authenticated %}
                 <a style="padding-left: 50px ; color: brown;" href="{% url 'project' %}">Home</a>
                 <a style="padding-left: 20px ; color: brown;" href="{% url 'project' %}">Profile</a>
                 <a style="padding-left: 20px ; color: brown;" href="{% url 'project' %}">Post</a>
-                <a style="float: right; color: brown;" href="{% url 'project' %}">Log Out</a> 
+                <a style="float: right; color: brown;" href="/logout">Log Out</a>
+                {% else %}
+                <a style="float: right; color: brown;" href="/accounts/login">Log In</a>
+                {% endif %}
             </div>
-           
-               
-            
+
+
         </div>
     </nav>
 </body>
