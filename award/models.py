@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Profile(models.Model):
     profile_photo = models.ImageField(upload_to = 'profile/')
-    editor = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     bio = models.TextField()
     contact = models.TextField()
 
@@ -30,7 +30,6 @@ class Project(models.Model):
     image = models.ImageField(upload_to = 'image/')
     description = models.TextField()
     link = models.CharField(max_length = 300)
-
     def save_project(self):
         self.save()
 
