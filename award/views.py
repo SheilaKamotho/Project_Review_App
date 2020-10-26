@@ -41,7 +41,7 @@ def new_project(request):
         form = NewProjectForm()
     return render(request, 'new_project.html', {"form":form, "current_user":current_user})
 
-def profile(request):
+def edit_profile(request):
     current_user = request.user
     profile = Profile.objects.get(user=request.user)
     if request.method == 'POST':
@@ -58,5 +58,5 @@ def profile(request):
             form = ProfileForm(instance = Profile.objects.get(user_id=current_user))
         else:
             form = ProfileForm()
-    return render(request, 'profile.html', {'current_user':current_user, 'form':form, 'profile':profile})
+    return render(request, 'edit_profile.html', {'current_user':current_user, 'form':form, 'profile':profile})
 
