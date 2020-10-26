@@ -3,7 +3,7 @@
 {{block.super}}
 <style>
     .wrimagecard-topimage_header {
-        padding: 20px;
+        padding: 10px;
     }
 
     .wrimagecard-topimage_title {
@@ -15,14 +15,20 @@
 <div class="container-fluid">
     <div class="row">
        {% for project in projects %}
+       {% for profile in profile %}
         <div class="col-md-4">
           <div class="wrimagecard wrimagecard-topimage" style="background-color:whitesmoke;">
              <h4
-                style="color: whitesmoke; padding-left: 20px; padding-top: 10px; padding-bottom: 5px; background-color: brown;">
+                style="color: whitesmoke; padding-left: 20px; padding-top: 10px; padding-bottom: 5px; background-color: brown"><img style="border-radius: 30px; width: 30px; height: 30px;" src="{{profile.profile_photo.url}}"> 
+                {{project.user.username}}
+             </h4>
+      
+             <h4
+                style="color: brown; padding-left: 20px; padding-top: 10px; padding-bottom: 5px;">
                 {{project.title}}
              </h4>
              <div class="wrimagecard-topimage_header">
-                <img style="width: 308px; height: 200px;" class="img-responsive" src="{{project.image.url}}">
+                <img style="width: 328px; height: 200px;" class="img-responsive" src="{{project.image.url}}">
              </div>
              <div class="wrimagecard-topimage_title">
                 <span style="color: brown;">Rating:</span><span style="color: purple;"><strong> 6
@@ -57,7 +63,7 @@
                </div>
             </div>
          </div>
-   
+         {% endfor %}
         {% endfor %}
     </div> 
 </div>

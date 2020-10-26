@@ -11,6 +11,9 @@ class Profile(models.Model):
     bio = models.TextField()
     contact = models.TextField()
 
+    def __str__(self):
+        return f'{self.user.username} Profile'
+
     def save_profile(self):
         self.save()
 
@@ -30,7 +33,7 @@ class Project(models.Model):
     image = models.ImageField(upload_to = 'image/')
     description = models.TextField()
     link = models.CharField(max_length = 300)
-    user = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,blank=True,null=True)
     pub_date = models.DateTimeField(auto_now_add=True, null=True)
 
     def save_project(self):
