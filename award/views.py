@@ -53,7 +53,6 @@ def edit_profile(request):
         return redirect('project')
 
     else:
-        else:
         if Profile.objects.filter(user_id=current_user).exists():
             form = ProfileForm(instance = Profile.objects.get(user_id=current_user))
         else:
