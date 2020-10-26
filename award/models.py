@@ -30,6 +30,7 @@ class Project(models.Model):
     image = models.ImageField(upload_to = 'image/')
     description = models.TextField()
     link = models.CharField(max_length = 300)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     def save_project(self):
         self.save()
 
