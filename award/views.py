@@ -5,6 +5,7 @@ from django.shortcuts import render, render
 from django.http  import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Profile, Project
+
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 def project(request):
