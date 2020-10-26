@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, render
+from django.shortcuts import render, redirect
 from django.http  import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Profile, Project
+from .forms import NewProjectForm
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -32,9 +33,9 @@ def new_project(request):
         form = NewProjectForm(request.POST, request.FILES)
         if form.is_valid():
             project = form.save(commit=False)
-            project.editor = current_user
+            project.user = current_user
             project.save()
-        return redirect('projects')
+        return redirect('project')
         
     else:
         form = NewProjectForm()
