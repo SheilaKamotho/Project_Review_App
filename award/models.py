@@ -31,6 +31,8 @@ class Project(models.Model):
     description = models.TextField()
     link = models.CharField(max_length = 300)
     user = models.ForeignKey(User,on_delete=models.CASCADE, null=True)
+    pub_date = models.DateTimeField(auto_now_add=True, null=True)
+
     def save_project(self):
         self.save()
 
