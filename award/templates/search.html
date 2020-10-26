@@ -1,12 +1,23 @@
 {%extends 'base.html'%} 
 {% block content %}
+<style>
+  .wrimagecard-topimage_header {
+      padding: 20px;
+  }
+
+  .wrimagecard-topimage_title {
+      padding-left: 20px;
+      height: 50px;
+      padding-bottom: 5px;
+  }
+</style>
 <div class="container">
 
-  <div class="row">
-    {% if articles%}
-      <h2>Found {{ projects|length }} of searched term {{message}}.</h2>
+  <div class="row" style="color: cornsilk;">
+    {% if projects%}
+      <h4>Found {{ projects|length }} of searched term {{message}}.</h4>
     {% else %}
-      <h2> Found 0 projects for the search term {{message}}.</h2>
+      <h4> Found 0 projects for the search term {{message}}.</h4>
     {% endif %}
 
   </div>
@@ -15,8 +26,48 @@
 
   {% if projects %}
     {% for project in projects %}
-      <div class="col-sm-6 col-md-3">
-          <h1>{{project.title}}</h1>
+      <div class="col-sm-4">
+        <div class="wrimagecard wrimagecard-topimage" style="background-color:whitesmoke;">
+          <h4
+             style="color: whitesmoke; padding-left: 20px; padding-top: 10px; padding-bottom: 5px; background-color: brown;">
+             {{project.title}}
+          </h4>
+          <div class="wrimagecard-topimage_header">
+             <img style="width: 308px; height: 200px;" class="img-responsive" src="{{project.image.url}}">
+          </div>
+          <div class="wrimagecard-topimage_title">
+             <span style="color: brown;">Rating:</span><span style="color: purple;"><strong> 6
+             </strong></span><span style="color: brown;">out of 10</span>
+             <a class="btn btn-danger btn-sm"
+                style="color: whitesmoke; float: right; margin-right: 20px;">Rate
+             </a>
+             <button type="button" style="color: whitesmoke; float: right; margin-right: 5px;"
+                class="btn btn-danger btn-sm" data-toggle="modal"
+                data-target="#myModal{{project.id}}">Details
+             </button>
+          </div>
+       </div>
+     </div>
+     <!-- Modal -->
+      <div class="modal fade" id="myModal{{project.id}}" role="dialog">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title" style="color: brown;">{{project.title}}</h4>
+               </div>
+               <div class="modal-body">
+                  <img style="width: 608px; height: 300px;" class="img-responsive" src="{{project.image.url}}">
+                  <p style="color: brown;">Description </p>
+                  <p>{{project.description}}</p>
+                  <a style="color: brown;" href="{{project.link}}">Visit Website <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+               </div>
+            </div>
+         </div>
+      </div>
       </div>
     {% endfor %}
   {% endif %}

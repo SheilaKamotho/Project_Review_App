@@ -9,8 +9,8 @@ from .models import Profile, Project
 @login_required(login_url='/accounts/login/')
 def project(request):
     profile=Profile.objects.all()
-    project=Project.objects.all()
-    return render(request, 'project.html',{"profile":profile, "project":project})
+    projects=Project.objects.all()
+    return render(request, 'project.html',{"profile":profile, "projects":projects})
 
 def search_results(request):
 

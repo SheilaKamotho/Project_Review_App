@@ -35,12 +35,13 @@ class Project(models.Model):
 
     @classmethod
     def save_project(cls):
-        project=cls.objects.filter()
-        return project
+        projects=cls.objects.filter()
+        return projects
     
+    @classmethod
     def search_by_title(cls,search_term):
-        proj = cls.objects.filter(title__icontains=search_term)
-        return proj
+        projects = cls.objects.filter(title__icontains=search_term)
+        return projects
 
     def update_project(self):
         self.update()
