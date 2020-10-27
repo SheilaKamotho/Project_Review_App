@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.http  import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Profile, Project
-from .forms import NewProjectForm, UpdateProfile, UpdateUser
+from .forms import NewProjectForm, UpdateProfile, UpdateUser, RateForm
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -60,3 +60,25 @@ def edit_profile(request):
         update_profile=UpdateProfile(instance=request.user.profile)
     return render(request, 'update_profile.html',{'update_user':update_user,'update_profile':update_profile})
 
+def rate(request, project_id):
+    project = Project.objects.get(projectID=project_id)
+    user = request.user
+
+    if request.method == 'POST':
+        form = RateForm(request.POST)
+        if form.is_valid():
+            rate = form.save(commit=False)
+            rate.user = user
+            rate.movie = movie
+            rate.save()
+            return HttpResponseRedirect(reverse('profile', args=[project_id]))
+
+        else:
+            form = RateForm()
+            template = loader.get_template('rate.html')
+            context = {
+            'form':form,
+            'project': project,
+            }
+
+        return HttpResponse(template.render(context, request))
