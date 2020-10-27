@@ -19,7 +19,8 @@
                 <strong style="font-size: 50px; padding-left: 30px;">{{user.username}}</strong><hr>
                 <h5>Bio</h5>
                 <p>{{user.profile.bio}}</p>
-                <span>{{user.email}}</span>
+                <span>{{user.email}}</span><br>
+                <a style="color: brown;" href="{% url 'new_profile' %}"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
             </div>
         </div>
     </div>
