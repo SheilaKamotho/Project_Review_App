@@ -54,3 +54,4 @@ class Project(models.Model):
 
     def delete_project():
         self.delete()
+

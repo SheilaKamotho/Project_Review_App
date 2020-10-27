@@ -15,9 +15,7 @@ def project(request):
     return render(request, 'project.html',{"profile":profile, "projects":projects})
 
 def profile(request):
-    profile=Profile.objects.all()
-    projects=Project.objects.all()
-    return render(request, 'profile.html',{"profile":profile, "projects":projects})
+    return render(request, 'profile.html')
 
 def search_results(request):
 
@@ -62,4 +60,3 @@ def edit_profile(request):
         update_profile=UpdateProfile(instance=request.user.profile)
     return render(request, 'update_profile.html',{'update_user':update_user,'update_profile':update_profile})
 
-#
