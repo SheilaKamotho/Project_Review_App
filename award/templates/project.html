@@ -33,9 +33,6 @@
              <div class="wrimagecard-topimage_title">
                 <span style="color: brown;">Rating:</span><span style="color: purple;"><strong> 6
                 </strong></span><span style="color: brown;">out of 10</span>
-                <a class="btn btn-danger btn-sm"
-                   style="color: whitesmoke; float: right; margin-right: 20px;" href=" {% url 'rate'%}"><i class="glyphicon glyphicon-star"></i> Rate
-                </a>
                 <button type="button" style="color: whitesmoke; float: right; margin-right: 5px;"
                    class="btn btn-danger btn-sm" data-toggle="modal"
                    data-target="#myModal{{project.id}}"><i class="glyphicon glyphicon-info-sign"></i> Details
@@ -58,7 +55,12 @@
                      <a style="color: brown;" href="{{project.link}}">Visit Website <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a>
                   </div>
                   <div class="modal-footer">
+                     
                      <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                     <a class="btn btn-danger btn-sm"
+                       style="color: whitesmoke; float: right; margin-right: 20px;" href=" {% url 'rate'%}"><i class="glyphicon glyphicon-star"></i> Rate
+                     </a>
+                     
                   </div>
                </div>
             </div>
