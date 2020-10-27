@@ -14,9 +14,11 @@ def project(request):
     projects=Project.objects.all()
     return render(request, 'project.html',{"profile":profile, "projects":projects})
 
+@login_required(login_url='/accounts/login/')
 def profile(request):
     return render(request, 'profile.html')
 
+@login_required(login_url='/accounts/login/')
 def search_results(request):
 
     if 'project' in request.GET and request.GET["project"]:
@@ -30,6 +32,7 @@ def search_results(request):
         message = "You haven't searched for any term"
         return render(request, 'search.html',{"message":message})
 
+@login_required(login_url='/accounts/login/')
 def new_project(request):
     current_user = request.user
     if request.method == 'POST':
@@ -44,6 +47,7 @@ def new_project(request):
         form = NewProjectForm()
     return render(request, 'new_project.html', {"form":form, "current_user":current_user})
 
+@login_required(login_url='/accounts/login/')
 def edit_profile(request):
     try:
         profile = request.user.profile
@@ -60,6 +64,7 @@ def edit_profile(request):
         update_profile=UpdateProfile(instance=request.user.profile)
     return render(request, 'update_profile.html',{'update_user':update_user,'update_profile':update_profile})
 
+@login_required(login_url='/accounts/login/')
 def rate(request, project_id):
     project = Project.objects.get(projectID=project_id)
     user = request.user
