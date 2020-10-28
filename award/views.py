@@ -21,7 +21,7 @@ def project(request):
 @login_required(login_url='/accounts/login/')
 def profile(request):
     profile = Profile.objects.get(user=request.user)
-    return render(request, 'profile.html',{"profile":profile})
+    return render(request, 'profile.html')
 
 @login_required(login_url='/accounts/login/')
 def search_results(request):
@@ -69,27 +69,28 @@ def edit_profile(request):
 
 @login_required(login_url='/accounts/login/')
 def rate(request):
-    project = Project.objects.get(request.user.project)
-    user = request.user
+    return render(request, 'rate.html')
+    # project = Project.objects.get(request.user.project)
+    # user = request.user
 
-    if request.method == 'POST':
-        form = RateForm(request.POST)
-        if form.is_valid():
-            rate = form.save(commit=False)
-            rate.user = user
-            rate.movie = movie
-            rate.save()
-            return HttpResponseRedirect(reverse('profile', args=[project_id]))
+    # if request.method == 'POST':
+    #     form = RateForm(request.POST)
+    #     if form.is_valid():
+    #         rate = form.save(commit=False)
+    #         rate.user = user
+    #         rate.movie = movie
+    #         rate.save()
+    #         return HttpResponseRedirect(reverse('profile', args=[project_id]))
 
-        else:
-            form = RateForm()
-            template = loader.get_template('rate.html')
-            context = {
-            'form':form,
-            'project': project,
-            }
+    #     else:
+    #         form = RateForm()
+    #         template = loader.get_template('rate.html')
+    #         context = {
+    #         'form':form,
+    #         'project': project,
+    #         }
 
-        return HttpResponse(template.render(context, request))
+    #     return HttpResponse(template.render(context, request))
 
 class ProfileList(APIView):
     def get(self, request, format=None):
