@@ -87,5 +87,5 @@ Create a pull request
 
 ## Contact Details
 kamothosheila@gmail.com\
-https://www.linkedin.com/in/sheila-kamotho-030011162/
+
 
