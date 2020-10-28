@@ -32,15 +32,14 @@
              style="color: whitesmoke; padding-left: 20px; padding-top: 10px; padding-bottom: 5px; background-color: brown;">
              {{project.title}}
           </h4>
+          <small style="padding-left:20px ;">{{project.pub_date}}</small>
           <div class="wrimagecard-topimage_header">
              <img style="width: 308px; height: 200px;" class="img-responsive" src="{{project.image.url}}">
           </div>
           <div class="wrimagecard-topimage_title">
-             <span style="color: brown;">Rating:</span><span style="color: purple;"><strong> 6
+             <span style="color: brown;">Rating:</span><span style="color: purple;"><strong> 8
              </strong></span><span style="color: brown;">out of 10</span>
-             <a class="btn btn-danger btn-sm"
-                style="color: whitesmoke; float: right; margin-right: 20px;">Rate
-             </a>
+             
              <button type="button" style="color: whitesmoke; float: right; margin-right: 5px;"
                 class="btn btn-danger btn-sm" data-toggle="modal"
                 data-target="#myModal{{project.id}}">Details
@@ -64,6 +63,9 @@
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                  <a class="btn btn-danger btn-sm" href="{% url 'rate' %}"
+                     style="color: whitesmoke; float: right; margin-right: 20px;">Rate
+                  </a>
                </div>
             </div>
          </div>

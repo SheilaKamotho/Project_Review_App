@@ -1,76 +1,78 @@
 {% extends 'base.html' %}
 {% block content %}
 <style>
-    .wrimagecard-topimage_header {
-        padding: 20px;
-    }
+   .wrimagecard-topimage_header {
+      padding: 20px;
+   }
 
-    .wrimagecard-topimage_title {
-        padding-left: 20px;
-        height: 50px;
-        padding-bottom: 5px;
-    }
+   .wrimagecard-topimage_title {
+      padding-left: 20px;
+      height: 50px;
+      padding-bottom: 5px;
+   }
 </style>
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="jumbotron">
-                <img style="border-radius: 250px; width: 250px; height: 250px;" src="{{user.profile.profile_photo.url}}"> 
-                <strong style="font-size: 50px; padding-left: 30px;">{{user.username}}</strong><hr>
-                <h5>Bio</h5>
-                <p>{{user.profile.bio}}</p>
-                <span>{{user.email}}</span><br>
-                <a style="color: brown;" href="{% url 'new_profile' %}"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+   <div class="row">
+      <div class="col-md-12">
+         <div class="jumbotron">
+            <img style="border-radius: 250px; width: 250px; height: 250px;" src="{{user.profile.profile_photo.url}}">
+            <strong style="font-size: 50px; padding-left: 30px;">{{user.username}}</strong>
+            <hr>
+            <h5>Bio</h5>
+            <p>{{user.profile.bio}}</p>
+            <span>{{user.email}}</span><br>
+            <a style="color: brown;" href="{% url 'new_profile' %}"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+         </div>
+      </div>
+   </div>
+   {%for image in user.project_set.all%}
+   <div class="col-sm-4">
+      <div class="wrimagecard wrimagecard-topimage" style="background-color:whitesmoke;">
+         <h4
+            style="color: whitesmoke; padding-left: 20px; padding-top: 10px; padding-bottom: 5px; background-color: brown;">
+            {{image.title}}
+         </h4>
+         <small style="padding-left:20px ;">{{image.pub_date}}</small>
+         <div class="wrimagecard-topimage_header">
+            <img style="width: 308px; height: 200px;" class="img-responsive" src="{{image.image.url}}">
+         </div>
+         <div class="wrimagecard-topimage_title">
+            <span style="color: brown;">Rating:</span><span style="color: purple;"><strong> 8
+               </strong></span><span style="color: brown;">out of 10</span>
+
+            <button type="button" style="color: whitesmoke; float: right; margin-right: 5px;"
+               class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal{{image.id}}">Details
+            </button>
+         </div>
+      </div>
+   </div>
+   {% endfor %}
+   <!-- Modal -->
+   {%for image in user.project_set.all%}
+   <div class="modal fade" id="myModal{{image.id}}" role="dialog">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <h4 class="modal-title" style="color: brown;">{{image.title}}</h4>
             </div>
-        </div>
-    </div>
-    {%for image in user.project_set.all%}
-    <div class="col-sm-4">
-        <div class="wrimagecard wrimagecard-topimage" style="background-color:whitesmoke;">
-          <h4
-             style="color: whitesmoke; padding-left: 20px; padding-top: 10px; padding-bottom: 5px; background-color: brown;">
-             {{image.title}}
-          </h4>
-          <div class="wrimagecard-topimage_header">
-             <img style="width: 308px; height: 200px;" class="img-responsive" src="{{image.image.url}}">
-          </div>
-          <div class="wrimagecard-topimage_title">
-             <span style="color: brown;">Rating:</span><span style="color: purple;"><strong> 6
-             </strong></span><span style="color: brown;">out of 10</span>
-             <a class="btn btn-danger btn-sm"
-                style="color: whitesmoke; float: right; margin-right: 20px;">Rate
-             </a>
-             <button type="button" style="color: whitesmoke; float: right; margin-right: 5px;"
-                class="btn btn-danger btn-sm" data-toggle="modal"
-                data-target="#myModal{{image.id}}">Details
-             </button>
-          </div>
-       </div>
-     </div>
-     {% endfor %}
-     <!-- Modal -->
-     {%for image in user.project_set.all%}
-      <div class="modal fade" id="myModal{{image.id}}" role="dialog">
-         <div class="modal-dialog">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title" style="color: brown;">{{image.title}}</h4>
-               </div>
-               <div class="modal-body">
-                  <img style="width: 608px; height: 300px;" class="img-responsive" src="{{image.image.url}}">
-                  <p style="color: brown;">Description </p>
-                  <p>{{image.description}}</p>
-                  <a style="color: brown;" href="{{image.link}}">Visit Website <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a>
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
-               </div>
+            <div class="modal-body">
+               <img style="width: 608px; height: 300px;" class="img-responsive" src="{{image.image.url}}">
+               <p style="color: brown;">Description </p>
+               <p>{{image.description}}</p>
+               <a style="color: brown;" href="{{image.link}}">Visit Website <span class="glyphicon glyphicon-new-window"
+                     aria-hidden="true"></span></a>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+               <a class="btn btn-danger btn-sm" style="color: whitesmoke; float: right; margin-right: 20px;">Rate
+               </a>
             </div>
          </div>
       </div>
-      {%endfor%}
    </div>
+   {%endfor%}
+</div>
 </div>
 
 {% endblock %}
