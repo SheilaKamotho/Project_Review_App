@@ -13,13 +13,14 @@
 </style>
 <div class="container">
    <div class="row">
+      {%for prof in user.profile_set.all%}
       <div class="col-md-12">
          <div class="jumbotron">
-            <img style="border-radius: 250px; width: 250px; height: 250px;" src="{{user.profile.profile_photo.url}}">
+            <img style="border-radius: 250px; width: 250px; height: 250px;" src="{{prof.profile_photo.url}}">
             <strong style="font-size: 50px; padding-left: 30px;">{{user.username}}</strong>
             <hr>
             <h5>Bio</h5>
-            <p>{{user.profile.bio}}</p>
+            <p>{{prof.bio}}</p>
             <span>{{user.email}}</span><br>
             <a style="color: brown;" href="{% url 'new_profile' %}"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
          </div>
@@ -46,6 +47,7 @@
          </div>
       </div>
    </div>
+   {% endfor %}
    {% endfor %}
    <!-- Modal -->
    {%for image in user.project_set.all%}

@@ -3,8 +3,12 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
 from django.http  import HttpResponse
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
 from django.contrib.auth.decorators import login_required
-from .models import Profile, Project
+from .models import Profile, Project, Review
+from .serializer import ProfileSerializer, ProjectSerializer
 from .forms import NewProjectForm, UpdateProfile, UpdateUser, RateForm
 
 # Create your views here.
@@ -16,7 +20,8 @@ def project(request):
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
-    return render(request, 'profile.html')
+    profile = Profile.objects.get(user=request.user)
+    return render(request, 'profile.html',{"profile":profile})
 
 @login_required(login_url='/accounts/login/')
 def search_results(request):
@@ -49,24 +54,22 @@ def new_project(request):
 
 @login_required(login_url='/accounts/login/')
 def edit_profile(request):
-    try:
-        profile = request.user.profile
-    except Profile.DoesNotExist:
-        profile = Profile(user=request.user)
-        update_user=UpdateUser(request.POST,instance=request.user)
-        update_profile=UpdateProfile(request.POST,request.FILES,instance=request.user.profile)
+    profile = Profile.objects.get(user=request.user)
+    print(profile)
+    update_user=UpdateUser(request.POST,instance=request.user)
+    update_profile=UpdateProfile(request.POST,request.FILES,instance=profile)
     if update_user.is_valid() and update_profile.is_valid():
         update_user.save()
         update_profile.save()
         return redirect('profile')
     else:
         update_user=UpdateUser(instance=request.user)
-        update_profile=UpdateProfile(instance=request.user.profile)
+        update_profile=UpdateProfile(instance=profile)
     return render(request, 'update_profile.html',{'update_user':update_user,'update_profile':update_profile})
 
 @login_required(login_url='/accounts/login/')
-def rate(request, project_id):
-    project = Project.objects.get(projectID=project_id)
+def rate(request):
+    project = Project.objects.get(request.user.project)
     user = request.user
 
     if request.method == 'POST':
@@ -87,3 +90,29 @@ def rate(request, project_id):
             }
 
         return HttpResponse(template.render(context, request))
+
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        all_profile = Profile.objects.all()
+        serializers = ProfileSerializer(all_profile, many=True)
+        return Response(serializers.data)
+    
+    def post(self, request, format=None):
+        serializers = ProfileSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ProjectList(APIView):
+    def get(self, request, format=None):
+        all_project = Project.objects.all()
+        serializers = ProjectSerializer(all_project, many=True)
+        return Response(serializers.data)
+
+    def post(self, request, format=None):
+        serializers = ProjectSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
