@@ -19,7 +19,7 @@ Sheila N.K.
 ##### 1. Clone the repository
 Clone the the repository by running
 
-###### git clone 
+###### git clone https://github.com/SheilaKamotho/Project_Review_App.git
 or download a zip file of the project from github
 
 Navigate to the project directory
