@@ -86,6 +86,6 @@ Push changes to github\
 Create a pull request
 
 ## Contact Details
-kamothosheila@gmail.com\
+kamothosheila@gmail.com
 
 
