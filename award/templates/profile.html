@@ -1,6 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-<style>
+
+<div class="container">
+   <div class="row">
+      <div class="col-md-12">
+         <div class="jumbotron">
+            <strong style="font-size: 50px; padding-left: 30px;">{{user.username}}</strong><hr>
+            <span style="padding-left: 30px;">{{user.email}}</span><br>
+
+         </div>
+      </div>
+   </div>
+</div> 
+
+<!-- <style>
    .wrimagecard-topimage_header {
       padding: 20px;
    }
@@ -13,14 +26,13 @@
 </style>
 <div class="container">
    <div class="row">
-      {%for prof in user.profile_set.all%}
       <div class="col-md-12">
          <div class="jumbotron">
-            <img style="border-radius: 250px; width: 250px; height: 250px;" src="{{prof.profile_photo.url}}">
+            <img style="border-radius: 250px; width: 250px; height: 250px;" src="{{user.profile.profile_photo.url}}">
             <strong style="font-size: 50px; padding-left: 30px;">{{user.username}}</strong>
             <hr>
             <h5>Bio</h5>
-            <p>{{prof.bio}}</p>
+            <p>{{user.profile.bio}}</p>
             <span>{{user.email}}</span><br>
             <a style="color: brown;" href="{% url 'new_profile' %}"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
          </div>
@@ -48,9 +60,8 @@
       </div>
    </div>
    {% endfor %}
-   {% endfor %}
    <!-- Modal -->
-   {%for image in user.project_set.all%}
+   <!-- {%for image in user.project_set.all%}
    <div class="modal fade" id="myModal{{image.id}}" role="dialog">
       <div class="modal-dialog">
          <div class="modal-content">
@@ -77,4 +88,4 @@
 </div>
 </div>
 
-{% endblock %}
+{% endblock %} --> 

@@ -18,9 +18,7 @@ def project(request):
     projects=Project.objects.all()
     return render(request, 'project.html',{"profile":profile, "projects":projects})
 
-@login_required(login_url='/accounts/login/')
 def profile(request):
-    profile = Profile.objects.get(user=request.user)
     return render(request, 'profile.html')
 
 @login_required(login_url='/accounts/login/')
@@ -53,9 +51,8 @@ def new_project(request):
     return render(request, 'new_project.html', {"form":form, "current_user":current_user})
 
 @login_required(login_url='/accounts/login/')
-def edit_profile(request):
-    profile = Profile.objects.get(user=request.user)
-    print(profile)
+def update_profile(request):
+    profile = Profile(user=request.user)
     update_user=UpdateUser(request.POST,instance=request.user)
     update_profile=UpdateProfile(request.POST,request.FILES,instance=profile)
     if update_user.is_valid() and update_profile.is_valid():
@@ -65,7 +62,26 @@ def edit_profile(request):
     else:
         update_user=UpdateUser(instance=request.user)
         update_profile=UpdateProfile(instance=profile)
-    return render(request, 'update_profile.html',{'update_user':update_user,'update_profile':update_profile})
+    return render(request, 'edit.html',{'update_user':update_user,'update_profile':update_profile})
+
+# @login_required(login_url='login')
+# def edit_profile(request, username):
+#     user = User.objects.get(username=username)
+#     if request.method == 'POST':
+#         user_form = UpdateUser(request.POST, instance=request.user)
+#         prof_form = UpdateProfile(request.POST, request.FILES, instance=request.user.profile)
+#         if user_form.is_valid() and prof_form.is_valid():
+#             user_form.save()
+#             prof_form.save()
+#             return redirect('profile', user.username)
+#     else:
+#         uform = UpdateUser(instance=request.user)
+#         pform = UpdateProfile(instance=request.user.profile)
+#     params = {
+#         'user_form': uform,
+#         'prof_form': pform,
+#     }
+#     return render(request, 'edit.html', params)
 
 @login_required(login_url='/accounts/login/')
 def rate(request):
