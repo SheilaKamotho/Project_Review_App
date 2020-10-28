@@ -19,6 +19,17 @@
                 <a style="padding-left: 50px ; color: brown;" href="{% url 'project' %}"><i class="glyphicon glyphicon-home"></i> Home</a>
                 <a style="padding-left: 20px ; color: brown;" href="{% url 'profile' %}"><i class="glyphicon glyphicon-user"></i> Profile</a>
                 <a style="padding-left: 20px ; color: brown;" href="{% url 'new_project' %}"><i class="glyphicon glyphicon-plus"></i> Post</a>
+                <span class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="color: brown; padding-left: 20px;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="glyphicon glyphicon-menu-down"></i>API
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" style="color: brown;" href="/api/profile/?format=json"><strong>Profile</strong></a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" style="color: brown;" href="/api/project/?format=json"><strong>Project</strong></a>
+                    </div>
+                </span>
+        
                 <!-- Adding a search form  -->
                 <div class="col-sm-4 col-md-4 navbar-right">
 
